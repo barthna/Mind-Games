@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jigsaw Puzzle Game</title>
+    <style>
+        /* Basic Styles */
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    color: #ffcc00;
+}
+
+.puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.piece {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Dragging Styles */
+.piece.dragging {
+    opacity: 0.5;
+}
+
+.points {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.instructions {
+    margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Jigsaw Puzzle</h1>
+        
+        <!-- Puzzle Board -->
+        <div class="puzzle-board" id="puzzle-board">
+            <!-- Puzzle pieces will be dynamically inserted here -->
+        </div>
+        
+        <!-- Points -->
+        <div class="points">
+            <p>Points: <span id="points">0</span></p>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="instructions">
+            <p>Drag and drop the pieces to solve the puzzle!</p>
+        </div>
+    </div>
+
+    <script>
+        let points = 0;
+let currentPuzzle = 0;
+
+// Puzzle images split into pieces (for this example, assume a 3x3 puzzle)
+const puzzleImages = [
+    "puzzle-piece1.jpg", "puzzle-piece2.jpg", "puzzle-piece3.jpg", 
+    "puzzle-piece4.jpg", "puzzle-piece5.jpg", "puzzle-piece6.jpg", 
+    "puzzle-piece7.jpg", "puzzle-piece8.jpg", "puzzle-piece9.jpg"
+];
+
+// Initialize the puzzle
+function initPuzzle() {
+    const board = document.getElementById("puzzle-board");
+    board.innerHTML = "";  // Clear any existing puzzle
+
+    const shuffledPieces = shuffle(puzzleImages.slice());
+
+    shuffledPieces.forEach((image, index) => {
+        const piece = document.createElement("div");
+        piece.classList.add("piece");
+        piece.setAttribute("draggable", true);
+        piece.setAttribute("data-index", index);
+        piece.style.backgroundImage = `url(${image})`;
+
+        piece.addEventListener("dragstart", dragStart);
+        piece.addEventListener("dragend", dragEnd);
+        piece.addEventListener("dragover", dragOver);
+        piece.addEventListener("drop", dropPiece);
+        piece.addEventListener("dragenter", dragEnter);
+        piece.addEventListener("dragleave", dragLeave);
+
+        board.appendChild(piece);
+    });
+}
+
+// Shuffle function to randomize puzzle pieces
+function shuffle(arr) {
+    return arr.sort(() => Math.random() - 0.5);
+}
+
+// Dragging the pieces
+let draggedPiece = null;
+
+function dragStart(e) {
+    draggedPiece = e.target;
+    setTimeout(() => e.target.classList.add("dragging"), 0);
+}
+
+function dragEnd(e) {
+    e.target.classList.remove("dragging");
+}
+
+// Allow piece to be dragged over a target piece
+function dragOver(e) {
+    e.preventDefault();
+}
+
+// Handle dropping the piece onto the target
+function dropPiece(e) {
+    e.preventDefault();
+    if (e.target !== draggedPiece && e.target.classList.contains("piece")) {
+        const draggedIndex = draggedPiece.getAttribute("data-index");
+        const targetIndex = e.target.getAttribute("data-index");
+
+        // Swap the pieces
+        const temp = draggedPiece.style.backgroundImage;
+        draggedPiece.style.backgroundImage = e.target.style.backgroundImage;
+        e.target.style.backgroundImage = temp;
+
+        draggedPiece.setAttribute("data-index", targetIndex);
+        e.target.setAttribute("data-index", draggedIndex);
+
+        checkPuzzleSolved();
+    }
+}
+
+function dragEnter(e) {
+    e.preventDefault();
+    e.target.classList.add("drag-over");
+}
+
+function dragLeave(e) {
+    e.target.classList.remove("drag-over");
+}
+
+// Check if the puzzle is solved
+function checkPuzzleSolved() {
+    const pieces = document.querySelectorAll(".piece");
+    let solved = true;
+
+    pieces.forEach(piece => {
+        const index = piece.getAttribute("data-index");
+        const correctImage = puzzleImages[index];
+        const currentImage = piece.style.backgroundImage.slice(5, -2);  // Extract the URL part
+
+        if (currentImage !== correctImage) {
+            solved = false;
+        }
+    });
+
+    if (solved) {
+        points += 10;
+        document.getElementById("points").textContent = points;
+        alert("Puzzle solved! You earned 10 points.");
+        setTimeout(() => initPuzzle(), 1000);  // Load the next puzzle after a short delay
+    }
+}
+
+// Start the puzzle on page load
+window.onload = initPuzzle;
+
+    </script>
+</body>
+</html>

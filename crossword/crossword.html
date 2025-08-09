@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 11x21 Crossword Puzzle</title>
+    <link rel="stylesheet" href="cross.css">
+</head>
+<body>
+    <div class="container">
+        <div class="clues-container left">
+            <h2>Yesterday , i...</h2>
+            <h3><u>Across</u></h3>
+            <ul id="across-clues">
+                <!-- Across clues will be populated here -->
+            </ul>
+        </div>
+        <div class="crossword-grid">
+            <div class="crossword-grid">
+                <!-- Example cell -->
+                <div class="cell">
+                  <input type="text" maxlength="1" data-answer="A" data-row="0" data-col="0" />
+                  <span class="clue-number">1</span>
+                </div>
+                <!-- Repeat for other cells -->
+              </div>
+              
+        </div>
+        <div class="clues-container right">
+            <h3><u>Down</u></h3>
+            <ul id="down-clues">
+                <!-- Down clues will be populated here -->
+            </ul>
+        </div>
+    </div>
+    <div class="cell empty"></div>
+    <div class="hidden-cell"></div>
+    <div class="buttons">
+        <button id="check-answers-button">Check Answers</button>
+        <button id="next-puzzle">Next Puzzle</button>
+    </div>
+    <img src="../pictures/pen2.png" alt="Pencil Icon" class="pencil-icon2">
+    <img src="../pictures/pen3.png" alt="Pencil Icon" class="pencil-icon3">
+    <img src="../pictures/pen.png" alt="Pencil Icon" class="pencil-icon">
+    <img src="../pictures/pen4.png" alt="Pencil Icon" class="pencil-icon4">
+    <div class="back-container">
+        <span class="back-icon" id="back-icon"><<</span>
+    </div>
+    <div id="game-overlay">
+        <div id="character-container">
+            <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+            <div class="speech-bubble">
+                <img src="../pictures/cloud.png" alt="Speech Bubble">
+                <p id="speech-text"></p>
+            </div>
+        </div>
+    </div>
+    <script src="cross.js"></script>
+</body>
+</html>

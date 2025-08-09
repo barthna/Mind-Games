@@ -1,0 +1,143 @@
+/* General body style for background and layout */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(-225deg, #FF057C 0%, #8D0B93 35%, #321575 100%);
+    margin: 0;
+    color: white;
+    padding: 0;
+}
+
+/* Game title */
+h1 {
+    margin-bottom: 20px;
+    font-size: 3em;
+}
+
+/* Game information section */
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%; /* Change to 90% for responsiveness */
+    max-width: 600px; /* Limit to a maximum width */
+    margin-bottom: 20px;
+}
+
+/* Timer and score styles */
+#timer, #score {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Play and restart button styles */
+#play-btn, #restart-btn {
+    padding: 10px 20px;
+    background-color: rgba(52, 152, 219, 0.8); /* Use semi-transparent color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#play-btn:hover, #restart-btn:hover {
+    background-color: rgba(41, 128, 185, 0.8); /* Use semi-transparent color */
+}
+
+/* Game board grid layout for 4x4 cards */
+#game-board {
+    width: 90%; /* Change to 90% for responsiveness */
+    max-width: 600px; /* Limit to a maximum width */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 150px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Card styles */
+.card {
+    background-color: rgba(44, 62, 80, 0.8); /* Use semi-transparent color */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2em;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    visibility: hidden;
+}
+
+/* Card flip and match animations */
+.card.flip img {
+    visibility: visible;
+}
+
+.card.matched {
+    background-color: rgba(39, 174, 96, 0.8); /* Use semi-transparent color */
+    cursor: default;
+    transform: scale(1.1);
+}
+
+/* Hidden class to hide the game board initially */
+.hidden {
+    display: none;
+}
+
+/* Popup styles */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9); /* Use semi-transparent color */
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+}
+
+/* Ensure responsiveness on smaller screens */
+@media (max-width: 768px) {
+    #game-board {
+        width: 90vw;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 20vw);
+    }
+
+    .card {
+        font-size: 4vw;
+    }
+
+    .info {
+        width: 90vw;
+        justify-content: space-between;
+    }
+
+    #play-btn, #restart-btn {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Sliding Puzzle</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='puzzle.css'>
+</head>
+<body>
+    <div class="background-tint"></div>
+    <div class="game-info">
+        <p id="timeDisplay">Time Left: 5:00</p>
+        <p id="moveDisplay">Moves: 0</p>
+        <button id="newGameBtnMain">Reset</button>
+    </div>
+    
+    <div id="tiles"></div>
+    
+    <!-- Win Modal -->
+    <div id="winModal" class="modal">
+        <div class="modal-content">
+            <h2>Congratulations! 🎉</h2>
+            <p id="winMessage"></p>
+            <p id="movesMessage"></p>
+            <button id="newGameModalBtn" class="wooden-btn">New Game</button>
+        </div>
+    </div>
+    
+    <div id="timeupModal" class="modal">
+        <div class="modal-content">
+            <h2>Time's Up! ⏳</h2>
+            <button id="tryAgainModalBtn" class="wooden-btn">Try Again</button>
+        </div>
+    </div>
+    <div class="back-container">
+        <span class="back-icon" id="back-icon"><<</span>
+    </div>
+    <div id="game-overlay">
+        <div id="character-container">
+            <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+            <div class="speech-bubble">
+                <img src="../pictures/cloud.png" alt="Speech Bubble">
+                <p id="speech-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src='puzzle.js'></script>
+</body>
+</html>

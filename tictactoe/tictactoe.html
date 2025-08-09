@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="tictactoe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div> <!-- Dark overlay for player selection -->
+    <div class="game-container">
+        <div class="player-choice" id="player-choice">
+            <p style="font-size: 24px; font-weight: bold;">Choose Your Symbol:</p>
+            <button class="choice-btn" onclick="chooseSymbol('X')">X</button>
+            <button class="choice-btn" onclick="chooseSymbol('O')">O</button>
+        </div>
+
+       <!-- Restart Button with Wooden Theme -->
+<div id="restart-btn" title="Restart Game">
+    <i class="fas fa-redo"></i> <!-- FontAwesome Reset Icon -->
+</div>
+
+
+        <!-- Turn Indicators -->
+        <div class="turn-indicators">
+            <div id="left-turn-box" class="turn-box">
+                <img id="left-sticker" class="turn-sticker" src="../pictures/cartoon.webp" alt="Player Sticker">
+                <p id="left-turn-text">Your Turn</p>
+            </div>
+            <div id="right-turn-box" class="turn-box">
+                <img id="right-sticker" class="turn-sticker" src="../pictures/robot.webp" alt="AI Sticker">
+                <p id="right-turn-text">AI Turn</p>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div id="game-board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <p id="result-message"></p>
+            <button id="new-game-btn">Play Again</button>
+
+        </div>
+    </div>
+    
+   <div id="game-overlay">
+        <div id="character-container">
+            <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+            <div class="speech-bubble">
+                <img src="../pictures/cloud.png" alt="Speech Bubble">
+                <p id="speech-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="tictactoe.js"></script>
+</body>
+</html>

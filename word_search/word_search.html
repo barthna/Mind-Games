@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search Game</title>
+   <link rel="stylesheet" href="word_search.css">
+   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-area"></div>
+    <div class="container">
+        <div class="game-board" id="board"></div>
+        <div class="word-list" id="wordList"></div>
+    </div>
+</div>
+        <div class="popup" id="popup">
+            <h2>Congratulations! 🎉</h2>
+            <p>You found all the words!</p>
+            <button class="new-game-btn" onclick="newGame()">New Game</button>
+        </div>
+        <div id="game-overlay">
+            <div id="character-container">
+                <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+                <div class="speech-bubble">
+                    <img src="../pictures/cloud.png" alt="Speech Bubble">
+                    <p id="speech-text"></p>
+                </div>
+            </div>
+        </div>
+    <script src="word_search.js"></script>
+</body>
+</html>

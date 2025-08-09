@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <link rel="stylesheet" href="sudoku.css">
+</head>
+<body>
+    <div class="glass-overlay"> </div>
+    
+    <div class="container">
+        <img src="sukodu1.jpg" alt="">
+        
+        <div id="sudoku-board"></div>
+        <div class="number-buttons">
+            <button class="number-btn">1</button>
+            <button class="number-btn">2</button>
+            <button class="number-btn">3</button>
+            <button class="number-btn">4</button>
+            <button class="number-btn">5</button>
+            <button class="number-btn">6</button>
+            <button class="number-btn">7</button>
+            <button class="number-btn">8</button>
+            <button class="number-btn">9</button>
+        </div>
+        <div id="timer-container">
+            <img src="../pictures/time3.png" alt="">
+        <div id="timer">00:00</div></div>
+        <div class="controls">
+            <button class="wood-button" id="new-game">New Game</button>
+            <button class="wood-button" id="validate">Validate</button>
+            <button class="wood-button" id="reset">Reset</button>
+        </div>
+        <div id="validationModal" class="modal">
+            <div class="modal-content">
+                <p id="validationMessage"></p>
+                <button id="close-validation-modal">Close</button>
+            </div>
+        </div>
+        <div id="newGameModal" class="modal">
+            <div class="modal-content">
+                <p>Are you sure you want to start a new game?</p>
+                <button id="yes-new-game">Yes</button>
+                <button id="no-new-game">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="half-circle"></div>
+    <img src="../pictures/leaf.png" alt="" class="leaf">
+    <img src="../pictures/leaf1.png" alt="" class="leaf1">
+    <div class="back-container">
+        <span class="back-icon" id="back-icon"><<</span>
+    </div>
+    <div id="game-overlay">
+        <div id="character-container">
+            <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+            <div class="speech-bubble">
+                <img src="../pictures/cloud.png" alt="Speech Bubble">
+                <p id="speech-text"></p>
+            </div>
+        </div>
+    </div>
+    <script src="sudoku.js"></script>
+</body>
+</html>

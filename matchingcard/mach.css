@@ -1,0 +1,314 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: url('https://www.toptal.com/designers/subtlepatterns/uploads/wood_pattern.png'); /* Wooden texture */
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  color: #4A2C2A; /* Dark wood color */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.score-table {
+  text-align: left;
+  width: 500px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: #8B5E3C; /* Light wood color */
+  font-weight: bold;
+}
+
+.stars {
+  display: flex;
+  list-style: none;
+  color: #A67C52;
+}
+
+.restart {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.deck {
+  background: #A67C52; /* Wooden brown */
+  margin: 0;
+  width: 612px;
+  min-height: 500px;
+  box-shadow: 10px 9px 31px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-bottom: 15px;
+  align-items: center;
+  border: 5px solid #8B5E3C;
+}
+
+.card {
+  transform: rotateY(0);
+  transition: 0.5s;
+  width: 125px;
+  height: 125px;
+  background: #d4a773; /* Wooden beige */
+  box-shadow: 5px 5px 24px -3px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-top: 15px;
+  cursor: pointer;
+  background-image: url('../pictures/card.png');
+
+  /* 🖼 Image ko perfect fit karne ke liye */
+  background-size: cover;  /* Image pura card cover kare */
+  background-position: center;  /* Image ka center dikhaye */
+  background-repeat: no-repeat; /* Image repeat na ho */
+}
+
+
+.show {
+  transform: rotateY(180deg);
+  transition: 0.5s;
+  background: #F4E1C6;
+  font-size: 33px;
+  color: #4A2C2A;
+  cursor: default;
+}
+
+.match {
+  background: #6D4C41;
+}
+
+.no-match {
+  background: #A52A2A;
+  transition: 0.1s;
+}
+
+.modal {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #F4E1C6;
+  padding: 1rem 1.5rem;
+  width: 35rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  border: 3px solid #8B5E3C;
+}
+
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: #8B5E3C;
+  color: white;
+}
+
+.close-button:hover {
+  background-color: #6D4C41;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.tick {
+  color: green;
+  font-size: 60px;
+  margin-left: 35px;
+}
+
+.modal-heading {
+  letter-spacing: 2px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  color: #4A2C2A;
+}
+
+.stats {
+  color: #8B5E3C;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.new-game {
+  background: #6D4C41;
+  color: #fff;
+  border: 0;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 25px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .deck {
+      width: 350px;
+      min-height: 280px;
+  }
+  .card {
+      width: 68px;
+      height: 68px;
+  }
+  .show {
+      font-size: 30px;
+  }
+  .modal-content {
+      width: 15rem;
+  }
+  .tick {
+      font-size: 45px;
+      margin-left: 25px;
+  }
+  h1 {
+      font-size: 20px;
+  }
+  h3 {
+      font-size: 16px;
+  }
+  .score-table {
+      width: 320px;
+  }
+}
+.back-icon {
+  font-size: 24px;
+  color: #3E2723; /* Dark wood color */
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.back-icon:hover {
+  transform: scale(1.1);
+  color: #5a3e1b; /* Darker wood on hover */
+}
+
+/* Positioning */
+.back-container {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+#game-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10000; /* 🎮 Ensures it stays visible but below player choice */
+}
+
+/* 🎭 Character Animation Fix */
+#character-container {
+  position: absolute;
+  bottom: -250px;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: moveUp 1.5s ease-out forwards;
+  z-index: 10002; /* 👑 Highest priority */
+}
+
+
+/* Character Appear Animation */
+@keyframes moveUp {
+  0% {
+      bottom: -250px;
+      opacity: 0;
+  }
+  100% {
+      bottom: 50px;
+      opacity: 1;
+  }
+}
+
+/* Character Image */
+.character-img {
+  width: 300px;
+  position: relative;
+  z-index: 100000;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: -220px;
+  left: 100%;
+  transform: translateX(-50%);
+  width: 350px;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 10001; /* 📢 Just below the character */
+}
+
+/* Speech Bubble Image */
+.speech-bubble img {
+  width: 100%;
+}
+
+/* Speech Text */
+#speech-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: #63480f; /* Golden */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

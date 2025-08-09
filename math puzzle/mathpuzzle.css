@@ -1,0 +1,326 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('../pictures/emptyshop1.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+   
+    transform-origin: center center; /* Zoom from the center */
+}
+
+
+
+/* 🏪 Shop Grid (X-Shape) */
+.shop {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* 3 columns for X shape */
+    grid-template-rows: repeat(3, 100px); /* 3 rows for X shape */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between items */
+    position: relative;
+    top: 180px;
+}
+
+
+.shop {
+    display: flex;
+    justify-content: center;  /* Horizontally Center */
+    align-items: center;
+    gap: 150px; /* Space between items */
+    flex-wrap: wrap; /* Mobile-friendly layout */
+    padding: 20px;
+}
+
+/* General price styling */
+.price {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: auto;
+    min-width: 50px;
+}
+
+/* Pencil */
+.item.pencil .price {
+    top: 181px; /* Adjust for pencil */
+    left: 33.7%;
+    transform: translateX(-50%);
+}
+
+/* Eraser */
+.item.eraser .price {
+    top: 181px; /* Adjust for eraser */
+    left: 41%;
+    transform: translateX(-50%);
+}
+
+/* Sharpener */
+.item.sharpener .price {
+    top: 181px; /* Adjust for sharpener */
+    left: 48.5%;
+    transform: translateX(-50%);
+}
+
+/* Rounder */
+.item.rounder .price {
+    top: 181px; /* Adjust for rounder */
+    left: 56%;
+    transform: translateX(-50%);
+}
+
+/* Scale */
+.item.scale .price {
+    top: 181px; /* Adjust for scale */
+    left: 63.7%;
+    transform: translateX(-50%);
+}
+
+/* Colour Plate */
+.item.colourplat .price {
+    top: 181px; /* Adjust for colour plate */
+    left: 71.4%;
+    transform: translateX(-50%);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    /* Adjust for tablets and smaller screens */
+    .item.pencil .price {
+        top: 150px;
+        left: 30%;
+    }
+    .item.eraser .price {
+        top: 150px;
+        left: 38%;
+    }
+    .item.sharpener .price {
+        top: 150px;
+        left: 46%;
+    }
+    .item.rounder .price {
+        top: 150px;
+        left: 54%;
+    }
+    .item.scale .price {
+        top: 150px;
+        left: 62%;
+    }
+    .item.colourplat .price {
+        top: 150px;
+        left: 70%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Adjust for mobile devices */
+    .item.pencil .price {
+        top: 120px;
+        left: 25%;
+    }
+    .item.eraser .price {
+        top: 120px;
+        left: 35%;
+    }
+    .item.sharpener .price {
+        top: 120px;
+        left: 45%;
+    }
+    .item.rounder .price {
+        top: 120px;
+        left: 55%;
+    }
+    .item.scale .price {
+        top: 120px;
+        left: 65%;
+    }
+    .item.colourplat .price {
+        top: 120px;
+        left: 75%;
+    }
+}
+
+.game-info {
+    background: rgba(160, 82, 45, 0.5); 
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 240px 500px rgba(0, 0, 0, 0.6); 
+    color: #f5e1c0; 
+    position: absolute;
+    top: 460px; 
+    left: 53.5%;
+    transform: translateX(-50%);
+    width: 70%; 
+    max-width: 900px; 
+    height: 162px; 
+    border: 10px solid rgba(255, 228, 196, 0.8); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center; 
+}
+
+/* 🟡 Question Styling  */
+#question {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 0px; 
+    color: #5c3320;
+    background-color: rgba(255, 228, 196, 1.0);
+    border-radius: 10px;
+    height: 200px; 
+    width: 500px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    padding: 15px;
+}
+
+/* 🔲 Answer Box */
+#answer {
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 250px;
+    border: 3px solid #8B4513;
+    border-radius: 10px;
+    background-color: rgba(255, 228, 196, 0.8);
+    color: #5c3320;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+
+
+/* 🎯 Feedback Message */
+#feedback {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Correct & Incorrect Styling */
+.correct {
+    color: #4CAF50;
+}
+
+.incorrect {
+    color: #FF6347;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Answer Box - Improved Design */
+#answer {
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 220px;
+    border: 3px solid #8B4513;
+    border-radius: 10px;
+    background-color: #fce4b7;
+    color: #5c3320;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Number Style Inside Answer Box */
+#answer::placeholder {
+    color: #c87f4f;
+    font-size: 18px;
+    font-style: italic;
+}
+
+/* Animated Submit Button */
+#submit {
+    padding: 12px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
+    background-color: #8B4513;
+    color: #fff;
+    display: block;
+    margin: 15px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    
+}
+
+/* Hover Effect for Submit Button */
+#submit:hover {
+    transform: scale(1.1);
+    background-color: #A0522D;
+}
+
+/* Larger, Themed Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    width: 380px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    color: white;
+}
+
+/* Popup Colors */
+.popup.success {
+    background: linear-gradient(135deg, #3a743c, #508652);
+}
+
+.popup.error {
+    background: linear-gradient(135deg, #95574c, #6e3434);
+}
+
+/* Close Button for Popup */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 26px;
+    cursor: pointer;
+    color: white;
+}
+
+ /* Light-to-Dark Page Load Animation */
+ .page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(211, 178, 107); /* Start with a bright screen */
+    z-index: 9999; /* Ensure it's on top */
+    animation: fadeOut 1.5s ease-in-out forwards; /* Fades to normal view */
+}
+
+/* Fade effect */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Navbar</title>
+    <link rel="stylesheet" type="text/css" href="loginpage.css">
+    <link href="https://fonts.googleapis.com/css2?family" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+        
+        <!-- Sign up form -->
+        <div class="signup">
+            <form id="signupForm">
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="username" id="signup-username" placeholder="User name" required>
+                <input type="email" name="email" id="signup-email" placeholder="Email" required>
+                <input type="password" name="password" id="signup-password" placeholder="Password" required>
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+
+        <!-- Login form -->
+        <div class="login">
+            <form id="loginForm">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" name="email" id="login-email" placeholder="Email" required>
+                <input type="password" name="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <div id="popupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <script>
+
+        // Function to show modal with message
+    function showModal(message) {
+    const modal = document.getElementById("popupModal");
+    const modalMessage = document.getElementById("modalMessage");
+    modalMessage.innerText = message;
+    modal.style.display = "block";
+
+    // Close modal when clicking "X"
+    document.querySelector(".close").onclick = function () {
+        modal.style.display = "none";
+    };
+
+        // Close modal when clicking outside the content
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
+        const signupForm = document.getElementById('signupForm');
+        const loginForm = document.getElementById('loginForm');
+
+        // Signup Form Submission
+signupForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById("signup-username").value;
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+
+    try {
+        const response = await fetch("http://localhost:5000/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            let errorMessage = data.errors
+                ? data.errors.map((error) => error.msg).join("\n")
+                : data.message || "Signup failed";
+            throw new Error(errorMessage);
+        }
+
+        showModal("Signup successful! Please login.");
+        document.getElementById("chk").checked = true;
+        signupForm.reset();
+    } catch (error) {
+        showModal(`Error: ${error.message}`);
+    }
+});
+
+// Login Form Submission
+loginForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    try {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+        }
+
+        localStorage.setItem("token", data.token);
+        showModal("Login successful! Redirecting...");
+
+        setTimeout(() => {
+            window.location.href = "/homepage.html";
+        }, 2000); // Redirect after 2 seconds
+    } catch (error) {
+        showModal(`Error: ${error.message}`);
+    }
+});
+    </script>
+</body>
+</html>

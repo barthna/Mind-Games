@@ -1,0 +1,437 @@
+/* Global Styles */
+body {
+
+    font-family: 'Arial', sans-serif;
+    background-image: url('../pictures/ticbg.jpg'); /* 🌳 Wooden texture background */
+    background-size: cover; /* ✅ Ensure it covers the whole screen */
+    background-repeat: no-repeat; /* ❌ No repetition */
+    background-position: center; /* 🎯 Center the image */
+    background-attachment: fixed; /* 🔒 Keep it fixed */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #4A2C18;
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(169, 114, 37, 0.3);
+    
+    position: relative;
+}
+
+/* Game Board */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 90vmin;
+    height: 90vmin;
+    max-width: 500px;
+    max-height: 500px;
+    background: #c49a6c;
+    border: 15px solid #8b5d33;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    font-family: 'Press Start 2P', cursive; /* Gaming Font */
+    font-weight: bold;
+
+    /* Wooden Theme Background */
+    background: linear-gradient(135deg, #C19A6B, #8B5A2B); /* Light to Dark Wood */
+    border: 4px solid #5C4033; /* Dark Wood Border */
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4), 
+                6px 6px 8px rgba(0, 0, 0, 0.5); /* 3D Depth Effect */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    /* 3D Wooden Text Effect */
+    color: #F4E1C6; /* Light Wood Text */
+    text-shadow: 3px 3px 0 #5C4033,  /* Dark Wood Shadow */
+                 6px 6px 0 #8B5A2B, 
+                 9px 9px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Click Effect */
+.cell:active {
+    transform: scale(0.95);
+    box-shadow: inset 6px 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+/* X & O Styling */
+.cell::after {
+    content: attr(data-value);
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+/* Ensure modal is on top */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Highest priority */
+}
+
+/* Ensure modal content is above everything */
+.modal-content {
+    background: rgba(245, 225, 164, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    z-index: 10000; /* Ensures it's above the modal */
+}
+
+/* Center the button inside the modal */
+#new-game-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+    background: #8b5d33;
+    color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+    z-index: 10001; /* Above everything */
+    border: 2px;
+    position: relative;
+    display: block; /* Make it a block element */
+    margin: 20px auto 0; /* Auto centers it horizontally */
+    text-align: center;
+}
+
+/* Ensure overlay is below the modal but above everything else */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998; /* Just below the modal */
+    display: none;
+}
+#new-game-btn:hover {
+    background: #a6734b;
+}
+
+/* Winner Text */
+#result-message {
+    font-size: 1.5rem;
+    color: #8b5d33;
+}
+
+
+.modal .buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    padding-bottom: 60px; /* Space for New Game Button */
+}
+
+/* Restart Button (Circular Wooden Design) */
+#restart-btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #D2B48C, #A0522D); /* Wooden Texture */
+    border: 4px solid #8b5d33;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.3), 0px 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    z-index: 9999; /* Ensure it appears above everything */
+}
+
+/* Reset Icon Styling */
+#restart-btn i {
+    font-size: 25px; /* Increase Icon Size */
+    color: #5f3b08;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10000; /* Ensure icon is on top */
+}
+
+/* Hover Effect */
+#restart-btn:hover {
+    background: linear-gradient(135deg, #A0522D, #8B5D33);
+    transform: scale(1.1) rotate(10deg);
+}
+
+#restart-btn:hover i {
+    transform: rotate(360deg);
+}
+
+
+/* Show Restart Icon after first move */
+#restart-btn.show {
+    display: flex; /* Show restart icon after first game */
+}
+
+/* Turn Indicators on Left and Right */
+.turn-indicators {
+    display: none;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical centering */
+    width: 100%;
+    z-index: 1; /* Lower z-index so that it does not overlap with the cells */
+    gap: 40px; /* Increase space between the left and right boxes */
+    padding: 0 20px; /* Padding to move away from body border */
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+/* Turn Boxes */
+.turn-box {
+    width: 200px; /* Increase width for larger boxes */
+    height: 200px; /* Increase height for better visibility */
+    border: 2px solid #8b5d33;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px; /* Increase font size for better readability */
+    transition: background-color 0.3s ease, transform 0.3s ease-in-out;
+    position: relative;
+    border-radius: 100px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow */
+    background: rgba(245, 225, 164, 0.8); /* Slight background color */
+}
+
+/* Active Turn Box (Green for current turn) */
+.turn-box.active {
+    background-color: lightgreen;
+    animation: greenLight 1.5s ease-out; /* Animate the green light */
+    transform: scale(1.1); /* Enlarge the whole turn box */
+}
+
+/* Sticker size increase during active turn and positioning it "half out" */
+.turn-box.active .turn-sticker {
+    transform: translateY(-40px) rotateX(10deg) rotateY(20deg) scale(1.5); /* Sticker raised and enlarged */
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3), 0px 0px 50px rgba(0, 0, 0, 0.5); /* Larger shadow for the enlarged sticker */
+    z-index: 2; /* Ensure sticker stays above the turn box */
+}
+
+/* Animation for Green Light */
+@keyframes greenLight {
+    0% {
+        background-color: rgba(245, 225, 164, 0.8); /* Start with the original background */
+    }
+    100% {
+        background-color: lightgreen; /* End with light green */
+    }
+}
+
+.turn-sticker {
+    width: 100px; /* Size of the sticker */
+    height: 100px; /* Size of the sticker */
+    margin-bottom: 15px; /* Space between sticker and text */
+    border-radius: 50%; /* Round shape for the sticker */
+    
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg); /* 3D transform */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Turn Text */
+.turn-box p {
+    margin: 0;
+    font-size: 22px; /* Increase font size for the turn text */
+}
+
+/* Position Left and Right Indicators */
+#left-turn-box {
+    margin-left: 150px;
+}
+
+#right-turn-box {
+    margin-right: 150px;
+}
+/* Player Choice Modal */
+.player-choice {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(245, 209, 164, 0.95);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+    border: 4px solid #8b5d33;
+    z-index: 9999;
+    animation: fadeIn 0.5s ease-in-out; /* 🎭 Below character, above everything else */
+}
+
+/* Player Choice Buttons */
+.choice-btn {
+    padding: 15px 30px;
+    font-size: 24px;
+    background: linear-gradient(to bottom, #c49a6c, #a6734b);
+    color: white;
+    border: 3px solid #8b5d33;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    font-weight: bold;
+    transition: all 0.3 ease-in-out;
+}
+
+.choice-btn:hover {
+    background: linear-gradient(to bottom, #a6734b, #8b5d33);
+    transform: scale(1.05);
+}
+
+/* Dark Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 900;
+    display: none;
+}
+.choice-btn:active {
+    transform: scale(0.95);
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+
+ #game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10000; /* 🎮 Ensures it stays visible but below player choice */
+}
+
+/* 🎭 Character Animation Fix */
+#character-container {
+    position: absolute;
+    bottom: -250px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: moveUp 1.5s ease-out forwards;
+    z-index: 10002; /* 👑 Highest priority */
+}
+
+
+/* Character Appear Animation */
+@keyframes moveUp {
+    0% {
+        bottom: -250px;
+        opacity: 0;
+    }
+    100% {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+/* Character Image */
+.character-img {
+    width: 300px;
+    position: relative;
+    z-index: 100000;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -220px;
+    left: 100%;
+    transform: translateX(-50%);
+    width: 350px;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 10001; /* 📢 Just below the character */
+}
+
+/* Speech Bubble Image */
+.speech-bubble img {
+    width: 100%;
+}
+
+/* Speech Text */
+#speech-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #63480f; /* Golden */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

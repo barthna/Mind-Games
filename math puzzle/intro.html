@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Intro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+        /* General styling */
+        .game-intro {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            overflow: hidden; 
+        }
+
+        /* Background door */
+        .door {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            cursor: pointer; 
+            transition: transform 1.5s ease-in-out;
+        }
+
+        /* Character positioning */
+        .cartoon {
+            position: absolute;
+            bottom: -200px; 
+            left: 250px;
+            display: flex;
+            align-items: center;
+            animation: riseUp 2s ease-in-out forwards; 
+        }
+
+        .cartoon img {
+            width: 250px;
+            
+        }
+
+/* Speech bubble */
+.cloud {
+    position: absolute;
+    bottom: 200px; /* Fixed position */
+    left: 380px;
+    width: 320px;
+    height: auto;
+    opacity: 0; /* Initially hidden */
+    transform: scale(0.8);
+    animation: appearCloud 0.8s ease-in-out forwards 2s; /* Delayed start */
+}
+
+/* Cloud Image with Inner Glow Effect */
+.cloud img {
+    width: 100%;
+    border-radius: 20px; /* Keep rounded edges */
+
+    /* ✨ Inner Glow Effect */
+    filter: drop-shadow(0px 0px 10px rgb(213, 158, 95)) drop-shadow(0px 0px 15px #ffdd44);
+    
+    /* Smooth Glow Animation */
+    animation: innerGlow 1.5s infinite alternate;
+}
+
+/* 🔥 Inner Glowing Animation */
+@keyframes innerGlow {
+    0% {
+        filter: drop-shadow(0px 0px 5px rgb(213, 158, 95)) drop-shadow(0px 0px 10px #ffdd44);
+    }
+    100% {
+        filter: drop-shadow(0px 0px 15px rgb(213, 158, 95)) drop-shadow(0px 0px 20px #ffdd44);
+    }
+}
+
+
+
+        .cloud-text {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Raleway', sans-serif;
+            color: rgba(152, 159, 152, 1); 
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+        }
+
+        /* Rise-up animation */
+        @keyframes riseUp {
+            0% { bottom: -200px; }
+            100% { bottom: 20px; }
+        }
+
+        /* Cloud fades & pops in place */
+        @keyframes appearCloud {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Door click animation */
+        @keyframes lightEffect {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+            100% { filter: brightness(1); }
+        }
+        /* Light-to-Dark Overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0); /* Initially transparent */
+    pointer-events: none; /* Doesn't block clicks */
+    transition: background 1.5s ease-in-out; /* Smooth fade */
+}
+
+    </style>
+</head>
+<body>
+    <div class="game-intro">
+        <img id="doorImage" src="../pictures/door1.jpg" alt="Closed Door" class="door">
+
+        <!-- Cartoon character -->
+        <div class="cartoon">
+            <img src="../pictures/cartoon.webp" alt="Cartoon Character">
+        </div>
+
+        <!-- Speech bubble (Cloud Image) -->
+        <div class="cloud">
+            <img src="../pictures/cloud.png" alt="Speech Bubble" width="220">
+            <div class="cloud-text">
+               Hello!!<br> I am Barth...<br>Click the door to open!
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+
+    <script>
+        document.getElementById("doorImage").addEventListener("click", function () {
+            this.style.animation = "lightEffect 1.5s ease-in-out";
+
+            setTimeout(() => {
+                window.location.href = "mathpuzzle.html";
+            }, 1500);
+        });
+        document.getElementById("doorImage").addEventListener("click", function () {
+    // Add light effect first
+    this.style.animation = "lightEffect 1s ease-in-out";
+
+    // Create a dark overlay effect
+    document.querySelector(".overlay").style.background = "rgb(211, 178, 107);";
+
+    // Redirect to next page after animation
+    setTimeout(() => {
+        window.location.href = "mathpuzzle.html";
+    }, 1500);
+});
+
+    </script>
+</body>
+</html>

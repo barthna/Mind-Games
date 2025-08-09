@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Shop Game</title>
+    <link rel="stylesheet" href="mathpuzzle.css">
+</head>
+<body>
+    
+    <div class="shop">
+        <div class="item pencil" data-item="pencil">
+            <span class="price" id="price-pencil">0</span>
+        </div>
+        <div class="item eraser" data-item="eraser">
+            <span class="price" id="price-eraser">0</span>
+        </div>
+        <div class="item sharpener" data-item="sharpener">
+            <span class="price" id="price-sharpener">0</span>
+        </div>
+        <div class="item rounder" data-item="rounder">
+            <span class="price" id="price-rounder">0</span>
+        </div>
+        <div class="item scale" data-item="scale">
+            <span class="price" id="price-scale">0</span>
+        </div>
+        <div class="item colourplat" data-item="colourplat">
+            <span class="price" id="price-colourplat">0</span>
+        </div>
+    </div>
+
+        <div class="game-info">
+
+            <p id="question">Loading question...</p>
+            <input type="number" id="answer" placeholder="Enter your answer">
+            <button id="submit">Submit</button>
+            <p id="feedback"></p>
+            
+        </div>
+    </div>
+    <div class="page-transition"></div>
+
+   
+    
+
+    <script src="mathpuzzle.js"></script>
+</body>
+</html>

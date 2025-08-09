@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="hangman.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="category-box">
+            <div class="category" id="category">Category: </div>
+        </div>
+
+        <!-- Hangman Drawing -->
+        <div class="hangman-container">
+            <svg height="280" width="250" class="hangman-drawing">
+                <!-- Gallows with rounded corners -->
+                <line x1="30" y1="250" x2="200" y2="250" stroke="#3E2723" stroke-width="10" stroke-linecap="round"/> <!-- Base -->
+                <line x1="115" y1="250" x2="115" y2="30" stroke="#3E2723" stroke-width="10" stroke-linecap="round"/> <!-- Vertical Pole -->
+                <line x1="115" y1="30" x2="65" y2="30" stroke="#3E2723" stroke-width="8" stroke-linecap="round"/> <!-- Top Bar -->
+                <line x1="65" y1="30" x2="65" y2="60" stroke="#6D4C41" stroke-width="5" stroke-linecap="round"/> <!-- Rope -->
+
+                <!-- Hangman Figure with Wooden Color and Face -->
+                <circle cx="65" cy="80" r="18" stroke="#8B5A2B" stroke-width="4" fill="#CD853F" class="hangman-part head" style="display: none;"/> 
+
+                <!-- Eyes (Smaller) -->
+                <circle cx="60" cy="75" r="0.5" fill="black" class="hangman-part eyes" style="display: none;"/> <!-- Left Eye -->
+                <circle cx="70" cy="75" r="0.5" fill="black" class="hangman-part eyes" style="display: none;"/> <!-- Right Eye -->
+
+                <!-- Mouth (Default Straight) -->
+                <line x1="60" y1="85" x2="70" y2="85" stroke="black" stroke-width="2" class="hangman-part mouth" style="display: none;"/>
+
+                <!-- Body -->
+                <line x1="65" y1="98" x2="65" y2="160" stroke="#8B5A2B" stroke-width="5" class="hangman-part body" style="display: none;"/> 
+
+                <!-- Arms -->
+                <line x1="65" y1="110" x2="45" y2="140" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round" class="hangman-part left-arm" style="display: none;"/> 
+                <line x1="65" y1="110" x2="85" y2="140" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round" class="hangman-part right-arm" style="display: none;"/> 
+
+                <!-- Legs -->
+                <line x1="65" y1="160" x2="50" y2="200" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round" class="hangman-part left-leg" style="display: none;"/> 
+                <line x1="65" y1="160" x2="80" y2="200" stroke="#8B5A2B" stroke-width="5" stroke-linecap="round" class="hangman-part right-leg" style="display: none;"/> 
+            </svg>
+        </div>
+
+        <!-- Word Display -->
+        <div class="word-display" id="wordDisplay"></div>
+
+        <!-- Alphabet Buttons -->
+        <div class="alphabet-container" id="alphabet"></div>
+
+        <!-- Live Message Display -->
+        <div class="game-message" id="game-message"></div>
+
+        <!-- Skip Button -->
+        <button class="skip-btn" id="skip-btn" onclick="skipWord()">Skip</button>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup" id="popup" style="display: none;">
+        <div class="popup-content">
+            <h2 id="popup-title">🎉 Congratulations!</h2>
+            <span id="popup-emoji" style="font-size: 40px;"></span>
+            <p id="popup-message">You won the game!</p>
+            <button class="close-popup" onclick="initializeGame()">New Game</button>
+        </div>
+    </div>
+ 
+    <div id="game-overlay">
+        <div id="character-container">
+            <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+            <div class="speech-bubble">
+                <img src="../pictures/cloud.png" alt="Speech Bubble">
+                <p id="speech-text"></p>
+            </div>
+        </div>
+    </div>
+    <div class="back-container">
+        <span class="back-icon" id="back-icon"><<</span>
+    </div>
+    <!-- JavaScript File -->
+    <script src="hangman.js"></script>
+</body>
+</html>

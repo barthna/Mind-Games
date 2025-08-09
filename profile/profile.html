@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gamer Profile</title>
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(135deg, #4a00e0, #8406f2);
+        color: #e0e0e0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("bg_img2.jpeg") no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+      }
+
+      .profile-container {
+        padding: 90px;
+        background: rgba(64, 0, 96, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        border-radius: 40px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+        max-width: 700px;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .profile-container h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #ff69b4;
+        font-size: 2.5em;
+        width: 100%;
+      }
+
+      .profile-container .left-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .user-avatar {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 4px solid #ff69b4;
+        background-color: #4a148c;
+        overflow: hidden;
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .upload-section {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .upload-section input {
+        display: none;
+      }
+
+      .upload-btn {
+        background-color: #ff69b4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      .upload-btn:hover {
+        background-color: #f06292;
+      }
+
+      .profile-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .static-info {
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .profile-container input,
+      .profile-container select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #673ab7;
+        border-radius: 10px;
+        background-color: #311b92;
+        color: #e0e0e0;
+        font-size: 1em;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      .profile-container input:disabled,
+      .profile-container select:disabled {
+        background-color: #444;
+        cursor: not-allowed;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .profile-container button {
+        background-color: #ff69b4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      .profile-container button:hover {
+        background-color: #f06292;
+      }
+
+      .popup {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        display: none;
+        z-index: 1000;
+        font-size: 1.2em;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .popup.show {
+        display: block;
+        animation: fadeIn 0.7s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -55%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* Loading spinner */
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #ff69b4;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+        display: none;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+  </head>
+  <body>
+    <div id="popup" class="popup">Successfully updated details!</div>
+    <div id="loading" class="spinner"></div>
+    <div class="profile-container">
+      <div class="left-section">
+        <h2>Gamer Profile</h2>
+        <div class="user-avatar">
+          <img
+            id="avatarPreview"
+            src=""
+            alt="Profile Picture"
+            style="display: none"
+          />
+        </div>
+        <div class="upload-section">
+          <label for="avatarUpload" class="upload-btn">Upload Image</label>
+          <input type="file" id="avatarUpload" accept="image/*" />
+        </div>
+      </div>
+      <div class="profile-details">
+        <div class="static-info" id="username-display">Name: Loading...</div>
+        <div class="static-info" id="email-display">Email: Loading...</div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" disabled />
+        <label for="dob">DOB:</label>
+        <input type="text" id="dob" placeholder="Select date" disabled />
+        <label for="gender">Gender:</label>
+        <select id="gender" disabled>
+          <option value="">Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" disabled />
+
+        <div class="button-container">
+          <button id="edit">Edit</button>
+          <button id="save" disabled>Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      // Get token from localStorage (assuming it was stored during login)
+      const token = localStorage.getItem('token');
+      
+      // Function to fetch user data
+      async function fetchUserData() {
+        document.getElementById('loading').style.display = 'block';
+        
+        try {
+          const response = await fetch('http://localhost:5000/api/profile', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+          }
+          
+          const data = await response.json();
+          
+          // Display username and email (from login)
+          document.getElementById('username-display').textContent = `Name: ${data.username || 'Not provided'}`;
+          document.getElementById('email-display').textContent = `Email: ${data.email || 'Not provided'}`;
+          
+          // Fill profile data if available
+          if (data.profile) {
+            document.getElementById('age').value = data.profile.age || '';
+            document.getElementById('dob').value = data.profile.dob || '';
+            document.getElementById('gender').value = data.profile.gender || '';
+            document.getElementById('phone').value = data.profile.phone || '';
+
+            if (data.profile.avatar) {
+                document.getElementById('avatarPreview').src = data.profile.avatar;
+                document.getElementById('avatarPreview').style.display = 'block';
+              }
+          }
+          
+          // Initialize date picker
+          flatpickr("#dob", {
+            dateFormat: "d-m-Y",
+            allowInput: true,
+            disableMobile: true // Better UX on mobile
+          });
+          
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+          showPopup('Error loading profile data', 'error');
+        } finally {
+          document.getElementById('loading').style.display = 'none';
+        }
+      }
+      
+      // Function to show popup with custom message and type
+      function showPopup(message, type = 'success') {
+        const popup = document.getElementById('popup');
+        popup.textContent = message;
+        popup.style.backgroundColor = type === 'error' ? 'rgba(255, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.8)';
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 2000);
+      }
+      
+      // Initialize edit/save functionality
+      document.getElementById('edit').addEventListener('click', () => {
+        document
+          .querySelectorAll('.profile-details input, .profile-details select')
+          .forEach((el) => {
+            el.disabled = false;
+          });
+        document.getElementById('save').disabled = false;
+      });
+
+      document.getElementById('save').addEventListener('click', async () => {
+        const age = document.getElementById('age').value;
+        const dob = document.getElementById('dob').value;
+        const gender = document.getElementById('gender').value;
+        const phone = document.getElementById('phone').value;
+        
+        document.getElementById('loading').style.display = 'block';
+        
+        try {
+          const response = await fetch('http://localhost:5000/api/profile', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              age,
+              dob,
+              gender,
+              phone
+            })
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to save profile data');
+          }
+          
+          document
+            .querySelectorAll('.profile-details input, .profile-details select')
+            .forEach((el) => {
+              el.disabled = true;
+            });
+          document.getElementById('save').disabled = true;
+          
+          showPopup('Profile updated successfully!');
+          
+        } catch (error) {
+          console.error('Error saving profile data:', error);
+          showPopup('Error saving profile data', 'error');
+        } finally {
+          document.getElementById('loading').style.display = 'none';
+        }
+      });
+
+      // Handle avatar upload
+      document.getElementById('avatarUpload').addEventListener('change', async function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+    
+        document.getElementById('loading').style.display = 'block';
+        
+        try {
+          // Create FormData to send the file
+          const formData = new FormData();
+          formData.append('avatar', file);
+    
+          const response = await fetch('http://localhost:5000/api/upload-avatar', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+            body: formData
+          });
+    
+          if (!response.ok) {
+            throw new Error('Failed to upload avatar');
+          }
+    
+          const result = await response.json();
+          
+          // Display the uploaded image
+          document.getElementById('avatarPreview').src = result.avatarUrl;
+          document.getElementById('avatarPreview').style.display = 'block';
+          
+          showPopup('Avatar uploaded successfully!');
+          
+        } catch (error) {
+          console.error('Error uploading avatar:', error);
+          showPopup('Error uploading avatar', 'error');
+        } finally {
+          document.getElementById('loading').style.display = 'none';
+        }
+      });
+        
+      // Fetch user data when page loads
+      document.addEventListener('DOMContentLoaded', fetchUserData);
+    </script>
+  </body>
+</html>

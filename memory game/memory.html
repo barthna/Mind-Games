@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wooden Memory Game</title>
+  <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+  <div id="difficulty-container">
+    <button id="easy-button" class="difficulty-button">Easy</button>
+    <button id="medium-button" class="difficulty-button">Medium</button>
+    <button id="hard-button" class="difficulty-button">Hard</button>
+  </div>
+
+  <button id="play-button">Start Game</button>
+  
+  <div id="game-container"></div>
+
+  <div id="game-over-modal" class="modal">
+    <div class="modal-content">
+      <h2>Game Over</h2>
+      <p>Rounds Cleared: <span id="final-rounds"></span></p>
+      <p>Best Record: <span id="final-record"></span></p>
+      <button id="new-game-button">Play Again</button>
+    </div>
+  </div>
+  <div class="back-container">
+    <span class="back-icon" id="back-icon"><<</span>
+</div>
+<div id="game-overlay">
+  <div id="character-container">
+      <img src="../pictures/cartoon.webp" alt="Character" class="character-img">
+      <div class="speech-bubble">
+          <img src="../pictures/cloud.png" alt="Speech Bubble">
+          <p id="speech-text"></p>
+      </div>
+  </div>
+</div>
+  <script src="memory.js"></script>
+</body>
+</html>

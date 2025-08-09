@@ -1,0 +1,247 @@
+body {
+    background: url('../pictures/bg.avif') ;
+    background-repeat: no-repeat;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+    justify-content: center;
+
+}
+.background-tint {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Black tint with 50% transparency */
+    z-index: -1;
+}
+.game-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+#tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 15px;
+    background: url('../pictures/wooden_pg.jpg');
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.btn {
+    font-size: 32px;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    background: url('../pictures/wooden_pg.jpg');
+    border: 3px solid #5a3d2b;
+    border-radius: 10px;
+    color: #5a3d2b;
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+.btn.empty {
+    background: transparent;
+    border: 3px dashed #5a3d2b;
+    cursor: not-allowed;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.selected {
+    background: #d4a373;
+    border-color: #5a3d2b;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: url('../pictures/wooden_pg.jpg');
+    margin: 15% auto;
+    padding: 30px;
+    width: 30%;
+    border-radius: 15px;
+    border: 3px solid #5a3d2b;
+    text-align: center;
+    color: #5a3d2b;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.wooden-btn {
+    background: #d4a373;
+    padding: 12px 25px;
+    border: 2px solid #5a3d2b;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #5a3d2b;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.wooden-btn:hover {
+    background: #b08d69;
+}
+
+#newGameBtnMain {
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #d4a373;
+    border: 2px solid #5a3d2b;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #5a3d2b;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#newGameBtnMain:hover {
+    background: #b5835a; /* Thoda dark wood shade */
+    color: #fff; /* White text */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+#newGameBtnMain:active {
+    transform: scale(0.95); /* Thoda dabane ka effect */
+}
+
+
+#timeDisplay, #moveDisplay {
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+/* Add empty tile styling */
+.btn.empty-tile {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    cursor: default;
+}
+
+/* Update tiles container grid */
+#tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: fit-content;
+}
+.back-icon {
+    font-size: 24px;
+    color: #e6dfdd; /* Dark wood color */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, color 0.2s;
+  }
+  
+  .back-icon:hover {
+    transform: scale(1.1);
+    color: #5a3e1b; /* Darker wood on hover */
+  }
+  
+  /* Positioning */
+  .back-container {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+  }
+  #game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10000; /* 🎮 Ensures it stays visible but below player choice */
+}
+
+/* 🎭 Character Animation Fix */
+#character-container {
+    position: absolute;
+    bottom: -250px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: moveUp 1.5s ease-out forwards;
+    z-index: 10002; /* 👑 Highest priority */
+}
+
+
+/* Character Appear Animation */
+@keyframes moveUp {
+    0% {
+        bottom: -250px;
+        opacity: 0;
+    }
+    100% {
+        bottom: 50px;
+        opacity: 1;
+    }
+}
+
+/* Character Image */
+.character-img {
+    width: 300px;
+    position: relative;
+    z-index: 100000;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -220px;
+    left: 100%;
+    transform: translateX(-50%);
+    width: 350px;
+    text-align: center;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 10001; /* 📢 Just below the character */
+}
+
+/* Speech Bubble Image */
+.speech-bubble img {
+    width: 100%;
+}
+
+/* Speech Text */
+#speech-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #63480f; /* Golden */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
